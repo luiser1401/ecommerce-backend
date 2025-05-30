@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from typing import Optional
 
 from app.model.db_table import Item
+from app.exceptions import EcommerceBackendException
 
 
 def write_to_db(db: Session, item: Item) -> Optional[Item]:
@@ -25,4 +26,4 @@ def write_to_db(db: Session, item: Item) -> Optional[Item]:
     except Exception as e:
         db.rollback()
         # Log the error here if needed
-        return None
+        raise EcommerceBackendException(f"Failed to write item to database: {str(e)}")

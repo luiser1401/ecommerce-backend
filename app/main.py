@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from app.data import init_db
+from app.exceptions import EcommerceBackendException
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +31,7 @@ async def lifespan(_app: FastAPI):
         logger.info("Closing database connections...")
     except Exception as e:
         logger.error(f"Failed to startup application: {e}")
-        raise Exception(e)
+        raise EcommerceBackendException(f"Application startup failed: {str(e)}")
 
 
 app = FastAPI(title="ecommerce backend",
