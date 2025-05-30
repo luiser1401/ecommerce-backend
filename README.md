@@ -35,7 +35,6 @@ ecommerce-backend/
 │   │   └── usecases/
 │   └── data/
 │       ├── models/
-│       ├── repositories/
 │       └── datasources/
 ├── rc/
 │   └── config.py
