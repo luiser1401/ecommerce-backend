@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from app.data.database import init_db
+from app.data import init_db
 
 logger = logging.getLogger(__name__)
 

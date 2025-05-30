@@ -23,15 +23,13 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # Base class for models
 Base = declarative_base()
 
+
 def init_db() -> None:
     """Initialize the database with tables."""
-    # Import models here to avoid circular imports
-    # from app.data.models.product import Product
-    # from app.data.models.user import User
-    # from app.data.models.order import Order
-    
+
     # Create all tables
     Base.metadata.create_all(bind=engine)
+
 
 def get_db() -> Generator[Session, None, None]:
     """Get a database session."""
