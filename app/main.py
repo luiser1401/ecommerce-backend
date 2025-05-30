@@ -1,27 +1,41 @@
-"""Main application module."""
+import logging
+from contextlib import asynccontextmanager
 
-import contextlib
-import uvicorn
 from fastapi import FastAPI
-from typing import AsyncGenerator
 
-@contextlib.asynccontextmanager
-async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
+logger = logging.getLogger(__name__)
+
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
     """
     Lifespan event handler for the FastAPI application.
     This runs on startup and shutdown of the application.
     """
-    # Startup logic
-    print("Application startup...")
-    yield
-    # Shutdown logic
-    print("Application shutdown...")
+    try:
+        # Startup logic
+        logger.info("Application startup...")
+        yield
+        # Shutdown logic
+        logger.info("Application shutdown...")
+    except Exception as e:
+        logger.info("Failed to startup application")
+        raise Exception(e)
 
-app = FastAPI(title="Clean Architecture API", lifespan=lifespan)
 
-@app.get("/")
-async def root():
-    return {"message": "Welcome to Clean Architecture API"}
+app = FastAPI(title="ecommerce backend",
+              lifespan=lifespan,
+              servers=[
+                  {"url": "http://localhost:8000"}
+              ]
+              )
+
+
+@app.get("/health-check")
+def health_check():
+    return "OK"
+
 
 if __name__ == "__main__":
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
