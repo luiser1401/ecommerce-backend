@@ -4,3 +4,19 @@ GET http://0.0.0.0:8000/health_check
 ### Create Item
 POST http://0.0.0.0:8000/item
 Content-Type: application/json
+
+{
+  "name": "Wireless Headphones",
+  "description": "Premium noise-cancelling wireless headphones with 30-hour battery life",
+  "price": 199.99,
+  "discount_price": 179.99,
+  "stock_quantity": 50,
+  "sku": "WH-1000XM4",
+  "image_url": "https://example.com/images/headphones.jpg",
+  "category": "Electronics",
+  "brand": "SoundMaster",
+  "weight": 0.25,
+  "dimensions": "18x15x8",
+  "is_active": true,
+  "is_featured": true
+}
