@@ -23,7 +23,7 @@ class EcomRequest(BaseModel):
     image_ur: str
     category: str
     brand: str
-    weight: str
+    weight: float
     dimensions: str  # format: LxWxH in cm
     is_active: bool
     is_featured: bool

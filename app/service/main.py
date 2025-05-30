@@ -24,23 +24,22 @@ def create_item(request: EcomRequest, db: Session) -> Optional[Item]:
             name=request.name,
             description=request.description,
             price=request.price,
-            discount_price=request.discount_price if hasattr(request, 'discount_price') else None,
+            discount_price=request.discount_priceNone,
             stock_quantity=request.stock_quantity,
             sku=request.sku,
-            image_url=request.image_url if hasattr(request, 'image_url') else None,
-            category=request.category if hasattr(request, 'category') else None,
-            brand=request.brand if hasattr(request, 'brand') else None,
-            weight=request.weight if hasattr(request, 'weight') else None,
-            dimensions=request.dimensions if hasattr(request, 'dimensions') else None,
-            is_active=request.is_active if hasattr(request, 'is_active') else True,
-            is_featured=request.is_featured if hasattr(request, 'is_featured') else False,
+            image_url=request.image_url,
+            category=request.category,
+            brand=request.brand,
+            weight=request.weight,
+            dimensions=request.dimensions,
+            is_active=request.is_active,
+            is_featured=request.is_featured,
         )
         
         # Add to session and commit
         db.add(new_item)
         db.commit()
         db.refresh(new_item)
-        
         return new_item
     except Exception as e:
         db.rollback()
