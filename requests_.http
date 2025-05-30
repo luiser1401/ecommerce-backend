@@ -1,0 +1,6 @@
+### Health Check
+GET http://0.0.0.0:8000/health_check
+
+### Create Item
+POST http://0.0.0.0:8000/item
+Content-Type: application/json

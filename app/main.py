@@ -44,11 +44,11 @@ app = FastAPI(title="ecommerce backend",
 app.include_router(v1_router)
 
 
-@app.get("/health-check")
+@app.get("/health_check")
 def health_check():
     return "OK"
 
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
