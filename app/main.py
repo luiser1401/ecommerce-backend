@@ -17,11 +17,17 @@ async def lifespan(_app: FastAPI):
     try:
         # Startup logic
         logger.info("Application startup...")
+        
+        # Initialize database
+        logger.info("Initializing database...")
         init_db()
-        logger.info("Database initialized")
+        logger.info("Database initialized successfully")
+        
         yield
+        
         # Shutdown logic
         logger.info("Application shutdown...")
+        logger.info("Closing database connections...")
     except Exception as e:
         logger.error(f"Failed to startup application: {e}")
         raise Exception(e)
