@@ -5,6 +5,7 @@ from fastapi import FastAPI
 
 from app.data import init_db
 from app.exceptions import EcommerceBackendException
+from app.web import v1_router
 
 logger = logging.getLogger(__name__)
 
@@ -40,6 +41,7 @@ app = FastAPI(title="ecommerce backend",
                   {"url": "http://localhost:8000"}
               ]
               )
+app.include_router(v1_router)
 
 
 @app.get("/health-check")
