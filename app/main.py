@@ -3,6 +3,8 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from app.data.database import init_db
+
 logger = logging.getLogger(__name__)
 
 
@@ -15,11 +17,13 @@ async def lifespan(_app: FastAPI):
     try:
         # Startup logic
         logger.info("Application startup...")
+        init_db()
+        logger.info("Database initialized")
         yield
         # Shutdown logic
         logger.info("Application shutdown...")
     except Exception as e:
-        logger.info("Failed to startup application")
+        logger.error(f"Failed to startup application: {e}")
         raise Exception(e)
 
 
